@@ -100,4 +100,24 @@ class UserController extends Controller
             return Response::json(['Ocorreu um erro Inesperado! Segue Erro: '.$exception->getMessage()], 500);
         }
     }
+
+    /**
+     * User - logout
+     * Esse Método tem como objetivo realizar o logout do sistema pelo usuário já logado.
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout()
+    {
+        try {
+            $user = Auth::user();
+            if ($user) {
+                Auth::logout();
+                return Response::json(['Logout feito com sucesso.']);
+            } else {
+                return Response::json(['Usuário não está logado.'], 401);
+            }
+        } catch (\Exception $exception) {
+            return Response::json(['Ocorreu um erro Inesperado! Segue Erro: '.$exception->getMessage()], 500);
+        }
+    }
 }
