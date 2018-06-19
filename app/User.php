@@ -61,6 +61,11 @@ class User extends Authenticatable
         return $this->hasMany('FederalSt\Vehicle', 'owner_id', 'id');
     }
 
+    public function isAdmin()
+    {
+        return $this->role === User::ROLE_ADMIN;
+    }
+
     /**
      * Enviando notificação de recuperação de senha.
      * @param string $token
