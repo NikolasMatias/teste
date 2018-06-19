@@ -5,6 +5,7 @@ namespace FederalSt\Http\Requests\Vehicles;
 use FederalSt\Vehicle;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 
 class DestroyRequest extends FormRequest
 {
@@ -32,5 +33,14 @@ class DestroyRequest extends FormRequest
         return [
             //
         ];
+    }
+
+    /**
+     * @param array $errors
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function response(array $errors)
+    {
+        return Response::json($errors, 403);
     }
 }

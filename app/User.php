@@ -8,10 +8,12 @@ use FederalSt\Notifications\StoreVehicleNotification;
 use FederalSt\Notifications\UpdateVehicleNotification;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Sofa\Eloquence\Eloquence;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use Eloquence;
     const ROLE_USER = 1;
     const ROLE_ADMIN = 2;
 
@@ -60,6 +62,8 @@ class User extends Authenticatable
     {
         return $this->hasMany('FederalSt\Vehicle', 'owner_id', 'id');
     }
+
+    //Métodos de Autenticação
 
     public function isAdmin()
     {

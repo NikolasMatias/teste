@@ -18,7 +18,7 @@ class CreateVehiclesTable extends Migration
             $table->integer('owner_id')->unsigned();
             $table->string('plate');
             $table->string('brand');
-            $table->string('model', 4);
+            $table->string('vehicle_model', 4);
             $table->string('year', 4);
             $table->string('renavam', 11);
 

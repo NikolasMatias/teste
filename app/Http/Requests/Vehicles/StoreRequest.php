@@ -5,6 +5,7 @@ namespace FederalSt\Http\Requests\Vehicles;
 use FederalSt\Vehicle;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 
 class StoreRequest extends FormRequest
 {
@@ -34,9 +35,18 @@ class StoreRequest extends FormRequest
             'plate' => 'required|string|max:8',
             'brand' => 'required||string',
             'year' => 'required|string|date_format:"Y"',
-            'model' => 'required|string|date_format:"Y"',
+            'vehicle_model' => 'required|string|date_format:"Y"',
             'renavam' => 'required|string|max:11'
 
         ];
+    }
+
+    /**
+     * @param array $errors
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function response(array $errors)
+    {
+        return Response::json($errors, 403);
     }
 }

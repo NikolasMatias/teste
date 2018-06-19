@@ -7,6 +7,8 @@ use Sofa\Eloquence\Eloquence;
 
 class Vehicle extends Model
 {
+    use Eloquence;
+
     protected $table='vehicles';
 
     /**
@@ -19,7 +21,7 @@ class Vehicle extends Model
     protected $searchableColumns = [
         'plate',
         'brand',
-        'model',
+        'vehicle_model',
         'year',
         'renavam'
     ];

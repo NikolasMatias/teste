@@ -3,6 +3,7 @@
 namespace FederalSt\Http\Requests\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Response;
 
 class LoginRequest extends FormRequest
 {
@@ -27,5 +28,14 @@ class LoginRequest extends FormRequest
             'email' => 'required|email|exists:users,email',
             'password' => 'required|string'
         ];
+    }
+
+    /**
+     * @param array $errors
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function response(array $errors)
+    {
+        return Response::json($errors, 403);
     }
 }

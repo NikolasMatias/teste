@@ -19,7 +19,7 @@ class Vehicle extends JsonResource
             'owner_id' => $this->owner_id,
             'plate' => $this->plate,
             'brand' => $this->brand,
-            'model' => $this->model,
+            'vehicle_model' => $this->vehicle_model,
             'year' => $this->year,
             'renavam' => $this->renavam,
             'owner' => new User($this->whenLoaded('owner')),

@@ -39,7 +39,7 @@ class UserController extends Controller
                     'phone' => 7,
                     'vehicles.plate' => 5,
                     'vehicles.brand' => 5,
-                    'vehicles.model' => 5,
+                    'vehicles.vehicle_model' => 5,
                     'vehicles.year' => 5,
                     'vehicles.renavam' => 5
                 ]);

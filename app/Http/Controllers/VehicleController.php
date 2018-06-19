@@ -3,6 +3,8 @@
 namespace FederalSt\Http\Controllers;
 
 use FederalSt\Http\Requests\Vehicles\IndexRequest;
+use FederalSt\Http\Requests\Vehicles\StoreRequest;
+use FederalSt\Http\Requests\Vehicles\UpdateRequest;
 use FederalSt\Http\Resources\Vehicle as VehicleResource;
 use FederalSt\Http\Resources\VehicleCollection;
 use FederalSt\Vehicle;
@@ -36,7 +38,7 @@ class VehicleController extends Controller
                     'plate' => 10,
                     'renavam' => 10,
                     'brand' => 9,
-                    'model' => 8,
+                    'vehicle_model' => 8,
                     'year' => 8,
                 ]);
             }
@@ -59,28 +61,91 @@ class VehicleController extends Controller
         }
     }
 
-    public function store()
+    /**
+     * VehicleController - store
+     * Esse Método foi feito para a criação de veículos.
+     * @param StoreRequest $request
+     * @return VehicleResource|\Illuminate\Http\JsonResponse
+     */
+    public function store(StoreRequest $request)
     {
         try {
-            return 0;
+            $vehicle = Vehicle::create([
+                'owner_id' => $request->input('owner_id'),
+                'plate' => $request->input('plate'),
+                'brand' => $request->input('brand'),
+                'year' => $request->input('year'),
+                'vehicle_model' => $request->input('vehicle_model'),
+                'renavam' => $request->input('renavam')
+            ]);
+
+            if ($vehicle) {
+                return new VehicleResource($vehicle);
+            } else {
+                return Response::json(['Problema ao criar o Veículo.'], 500);
+            }
         } catch (\Exception $exception) {
             return Response::json(['Ocorreu um erro Inesperado! Segue Erro: '.$exception->getMessage()], 500);
         }
     }
 
+    /**
+     * VehicleController - show
+     * Esse Método tem como objetivo buscar apenas um Veículo.
+     * @param $id
+     * @return VehicleResource|\Illuminate\Http\JsonResponse
+     */
     public function show($id)
     {
         try {
-            return 0;
+            $vehicle = Vehicle::with('owner')
+                ->where('id', $id)->first();
+            if ($vehicle) {
+                return new VehicleResource($vehicle);
+            } else {
+                return Response::json(['Dados não encontrados'], 500);
+            }
         } catch (\Exception $exception) {
             return Response::json(['Ocorreu um erro Inesperado! Segue Erro: '.$exception->getMessage()], 500);
         }
     }
 
-    public function update()
+    /**
+     * VehicleController - update
+     * Esse Método tem como objetivo atualizar  os dados de um Veículo.
+     * @param UpdateRequest $request
+     * @param $id
+     * @return VehicleResource|\Illuminate\Http\JsonResponse
+     */
+    public function update(UpdateRequest $request, $id)
     {
         try {
-            return 0;
+            $owner_id = $request->input('owner_id');
+            $plate = $request->input('plate');
+            $brand = $request->input('brand');
+            $year = $request->input('year');
+            $vehicle_model = $request->input('vehicle_model');
+            $renavam = $request->input('renavam');
+
+            $vehicle = Vehicle::with('owner')
+                ->where('id', $id)->first();
+
+            if ($vehicle) {
+                $vehicle->owner_id = $owner_id;
+                $vehicle->plate = $plate;
+                $vehicle->brand = $brand;
+                $vehicle->year = $year;
+                $vehicle->vehicle_model = $vehicle_model;
+                $vehicle->renavam = $renavam;
+
+                if ($vehicle) {
+                    return new VehicleResource($vehicle);
+                } else {
+                    return Response::json(['Problema ao salvar os Dados no Banco.'], 500);
+                }
+            } else {
+                return Response::json(['Dados não encontrados'], 500);
+            }
         } catch (\Exception $exception) {
             return Response::json(['Ocorreu um erro Inesperado! Segue Erro: '.$exception->getMessage()], 500);
         }

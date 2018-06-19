@@ -3,6 +3,7 @@
 namespace FederalSt\Http\Requests\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Response;
 
 class IndexRequest extends FormRequest
 {
@@ -29,5 +30,14 @@ class IndexRequest extends FormRequest
             'filter' => 'nullable|string',
             'vehicle_id' => 'nullable|integer|exists:vehicles,id'
         ];
+    }
+
+    /**
+     * @param array $errors
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function response(array $errors)
+    {
+        return Response::json($errors, 403);
     }
 }
