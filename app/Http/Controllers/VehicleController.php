@@ -151,10 +151,26 @@ class VehicleController extends Controller
         }
     }
 
+    /**
+     * VehicleController - destroy
+     * Esse Método tem como objetivo destruir um Veículo.
+     * @param $id
+     * @return VehicleResource|\Illuminate\Http\JsonResponse
+     */
     public function destroy($id)
     {
         try {
-            return 0;
+            $vehicle = Vehicle::with('owner')
+                ->where('id', $id)->first();
+            if ($vehicle) {
+                if ($vehicle->delete()) {
+                    return new VehicleResource($vehicle);
+                } else {
+                    return Response::json(['Problema ao excluir um Veículo.'], 500);
+                }
+            } else {
+                return Response::json(['Dados não encontrados'], 500);
+            }
         } catch (\Exception $exception) {
             return Response::json(['Ocorreu um erro Inesperado! Segue Erro: '.$exception->getMessage()], 500);
         }
