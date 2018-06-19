@@ -2,7 +2,9 @@
 
 namespace FederalSt\Http\Requests\Vehicles;
 
+use FederalSt\Vehicle;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class IndexRequest extends FormRequest
 {
@@ -13,7 +15,11 @@ class IndexRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        $vehicle = Vehicle::find($this->get('id'));
+        if (Auth::user()->can('vehicles.index', $vehicle)) {
+            return true;
+        }
+        return false;
     }
 
     /**

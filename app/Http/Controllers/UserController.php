@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Response;
 class UserController extends Controller
 {
     /**
-     * User - index
+     * UserController - index
      * Método feito para buscar um conjunto de usuários através de uma pesquisa que pode ser tanto simples quanto avançada.
      * Além disso, ela pode ser paginada ou não.
      * @param IndexRequest $request
@@ -70,7 +70,7 @@ class UserController extends Controller
     }
 
     /**
-     * User - login
+     * UserController - login
      * Esse método tem como objetivo realizar o Login dos Usuários na plataforma.
      * @param LoginRequest $request
      * @return UserResource|\Illuminate\Http\JsonResponse
@@ -102,7 +102,7 @@ class UserController extends Controller
     }
 
     /**
-     * User - logout
+     * UserController - logout
      * Esse Método tem como objetivo realizar o logout do sistema pelo usuário já logado.
      * @return \Illuminate\Http\JsonResponse
      */
