@@ -67,3 +67,8 @@ Entre em contato conosco, caso você tenha alguma dúvida ou quando terminar o p
 - Você tem 2 dias pra realizar esse teste prático.
 
 ## SUBMETA SEU PROJETO, MESMO QUE VOCÊ NÃO O TERMINE. NESTE CASO, NOS EXPLIQUE QUAIS FORAM AS SUAS DIFICULDADES. 
+
+
+# Documentação do Nikolas
+
+A Documentação para explicações mais detalhadas estão na [Wiki deste Projeto](https://github.com/NikolasMatias/teste/wiki).
