@@ -2,6 +2,9 @@
 
 namespace FederalSt\Http\Controllers;
 
+use FederalSt\Events\VehicleDestroy;
+use FederalSt\Events\VehicleStore;
+use FederalSt\Events\VehicleUpdate;
 use FederalSt\Http\Requests\Vehicles\IndexRequest;
 use FederalSt\Http\Requests\Vehicles\StoreRequest;
 use FederalSt\Http\Requests\Vehicles\UpdateRequest;
@@ -85,7 +88,7 @@ class VehicleController extends Controller
 
             if ($vehicle) {
                 $user = User::find($owner_id);
-                $user->sendStoreVehicleNotification($vehicle);
+                event(new VehicleStore($user, $vehicle));
 
                 return new VehicleResource($vehicle);
             } else {
@@ -147,7 +150,7 @@ class VehicleController extends Controller
 
                 if ($vehicle->save()) {
                     $user = User::find($owner_id);
-                    $user->sendUpdateVehicleNotification($vehicle);
+                    event(new VehicleUpdate($user, $vehicle));
 
                     return new VehicleResource($vehicle);
                 } else {
@@ -175,7 +178,7 @@ class VehicleController extends Controller
             if ($vehicle) {
                 if ($vehicle->delete()) {
                     $user = User::find($vehicle->owner_id);
-                    $user->sendDestroyVehicleNotification($vehicle);
+                    event(new VehicleDestroy($user, $vehicle));
 
                     return new VehicleResource($vehicle);
                 } else {
