@@ -1,0 +1,44 @@
+.v-select {
+  & .dropdown-toggle {
+    border-radius: 0 !important;
+  }
+
+  & .selected-tag {
+    height: 34px;
+    border-radius: 0 !important;
+
+    & + input {
+      width: 1em !important;
+    }
+  }
+
+  & input:focus {
+    width: 100% !important;
+
+    & + .open-indicator:before {
+      border-color: $federal-primary !important;
+    }
+  }
+
+  & input {
+    & + .open-indicator:before {
+      border-color: $federal-primary !important;
+    }
+  }
+
+  & .disabled {
+    & .open-indicator:before {
+      border-color: rgba(60,60,60,.5) !important;
+    }
+  }
+}
+
+
+.has-danger {
+  & .form-control {
+    border-color: #d9534f !important;
+  }
+  & .form-control-danger {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23d9534f' viewBox='-2 -2 7 7'%3E%3Cpath stroke='%23d9534f' d='M0 0l3 3m0-3L0 3'/%3E%3Ccircle r='.5'/%3E%3Ccircle cx='3' r='.5'/%3E%3Ccircle cy='3' r='.5'/%3E%3Ccircle cx='3' cy='3' r='.5'/%3E%3C/svg%3E") !important;
+  }
+}

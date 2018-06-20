@@ -28,8 +28,19 @@ class UserController extends Controller
             $per_page = $request->input('per_page');
             $filter = $request->input('filter');
             $vehicle_id = $request->input('vehicle_id');
+            $hasVehicle = $request->input('hasVehicles');
 
             $users = User::with('vehicles');
+
+            if ($vehicle_id) {
+                $users = $users->whereHas('vehicles', function ($queryVechicles) use ($vehicle_id) {
+                    $queryVechicles->where('id', $vehicle_id);
+                });
+            }
+
+            if ($hasVehicle) {
+                $users = $users->whereHas('vehicles');
+            }
 
             if ($filter) {
                 $users = $users->search($filter, [
@@ -43,12 +54,6 @@ class UserController extends Controller
                     'vehicles.year' => 5,
                     'vehicles.renavam' => 5
                 ]);
-            }
-
-            if ($vehicle_id) {
-                $users = $users->whereHas('vehicles', function ($queryVechicles) use ($vehicle_id) {
-                    $queryVechicles->where('id', $vehicle_id);
-                });
             }
 
             if ($all) {

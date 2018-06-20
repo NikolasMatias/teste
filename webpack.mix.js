@@ -11,5 +11,21 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+mix.autoload({
+    'jquery': ['$', 'window.jQuery', 'jQuery'],
+    'tether': ['window.Tether', 'Tether'],
+    'axios': ['window.axios', 'axios'],
+    'vue': ['window.Vue', 'Vue'],
+    'vee-validate': ['window.VeeValidate', 'VeeValidate'],
+    'node-waves': ['window.Waves', 'Waves']
+});
+
+mix.js('resources/assets/js/app.js', 'public/js/app.js');
+mix.sass('resources/assets/sass/app.scss', 'public/css/app.css');
+
+mix.js('resources/assets/js/home.js', 'public/js/home.js');
+mix.sass('resources/assets/sass/home.scss', 'public/css/home.css');
+
+if (mix.inProduction()) {
+    mix.version();
+}

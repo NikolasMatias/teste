@@ -1,0 +1,186 @@
+@import "~bootstrap/scss/bootstrap";
+@import "~font-awesome/scss/font-awesome";
+
+@import "./layouts/variables";
+
+@import "./layouts/page";
+
+.home {
+  margin-top: 40px;
+
+  .home-row {
+    & .home-title {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      background-color: $federal-primary;
+      color: $federal-secondary;
+      & p {
+        font-size: 1.5em;
+        margin: 0;
+      }
+      & i {
+        float: right;
+        padding-top: 5px;
+        padding-right: 10px;
+        font-size: 1.5em;
+        cursor: pointer;
+      }
+
+      & input {
+        border: 0;
+        color: $federal-secondary !important;
+        background-color: $federal-primary;
+        margin-top: 5px;
+        border-bottom: 1px solid $federal-secondary;
+        width: 100%;
+
+        &::placeholder {
+          color: $federal-secondary !important;
+        }
+
+        &::-webkit-input-placeholder, &::-moz-placeholder, &:-ms-input-placeholder {
+          color: $federal-secondary !important;
+          background: $federal-secondary;
+        }
+
+        &:after {
+          content: '\f002';
+          font-family: FontAwesome;
+          color: $federal-secondary;
+          position: absolute; right: 0; top: 0;
+          background: $federal-primary;
+          text-align: center;
+          width: 7%;
+          height: 100%;
+          pointer-events: none;
+          box-sizing: border-box;
+        }
+      }
+    }
+    & .home-body {
+      & .home-loading {
+        text-align: center;
+      }
+      & .home-elements {
+        &:hover {
+          cursor: pointer;
+          background-color: rgba(107,107,106,.3);
+        }
+
+        padding: 20px;
+        border: 1px solid $federal-text-light;
+        & p {
+          margin: 0;
+          overflow-x: hidden;
+        }
+      }
+    }
+  }
+
+
+  & .new-input {
+    & .date-type {
+      background: $federal-secondary url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
+    }
+    & input {
+      width: 100%;
+      border: 0;
+      color: $federal-text-light;
+      outline: none;
+      border-bottom: 1px solid $federal-text-light;
+      margin-top: 10px;
+
+      &[type="date"] {
+        background: $federal-secondary url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
+
+        &::-webkit-inner-spin-button {
+          display: none;
+        }
+        &::-webkit-calendar-picker-indicator {
+          opacity: 0;
+        }
+      }
+    }
+
+    & select {
+      margin-top: 10px;
+    }
+    & label {
+      margin-top: 10px;
+    }
+  }
+
+  #filterVehicle {
+    width: 100%;
+    margin-bottom: 20px;
+    & .card-header {
+      background-color: $federal-primary;
+      border-radius: 0;
+      text-align: center;
+      transition: height 2s;
+    }
+    & .card {
+      width: 100%;
+    }
+    .show {
+      transition: height 2s;
+    }
+  }
+
+  .list-header-button-model {
+    right: calc(30% + 30px);
+    top: 0;
+    cursor: pointer;
+    color: $federal-secondary;
+  }
+
+  & .col-home-buttom {
+    & .home-buttom {
+      background-color: $federal-primary;
+      border-radius: 0;
+      color: $federal-secondary;
+      float: right;
+      margin-top: 20px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    & .home-modal-buttom {
+      background-color: rgba(239, 130, 0, .8);
+      border-radius: 0;
+      border: 0;
+      color: $federal-secondary;
+      float: right;
+
+      &:hover {
+        background-color: rgba(239, 130, 0, 1);
+        cursor: pointer;
+      }
+    }
+
+    & .home-modal-delete-buttom {
+      background-color: rgba(255,0,0,.5);
+      border-radius: 0;
+      border: 0;
+      color: $federal-secondary;
+      float: left;
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+
+      &:hover {
+        background-color: rgba(255,0,0,.8);
+        cursor: pointer;
+      }
+    }
+
+    & .home-modal-close-buttom {
+      border-radius: 0;
+    }
+  }
+}
+
+.list-navbar {
+
+}

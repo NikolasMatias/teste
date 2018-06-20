@@ -36,7 +36,8 @@ class IndexRequest extends FormRequest
             'per_page' => 'nullable|numeric',
             'all' => 'nullable|boolean',
             'filter' => 'nullable|string',
-            'vehicle_id' => 'nullable|integer|exists:vehicles,id'
+            'vehicle_id' => 'nullable|integer|exists:vehicles,id',
+            'hasVehicles' => 'nullable|boolean'
         ];
     }
 

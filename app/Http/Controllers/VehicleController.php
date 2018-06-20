@@ -40,7 +40,7 @@ class VehicleController extends Controller
 
             if ($filter) {
                 $vehicles = $vehicles->search($filter, [
-                    'plate' => 10,
+                    'plate' => 15,
                     'renavam' => 10,
                     'brand' => 9,
                     'vehicle_model' => 8,
