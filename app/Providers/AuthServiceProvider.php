@@ -35,6 +35,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('users.index', 'FederalSt\Policies\UserPolicy@view');
 
         //Para os Veículos
+        Gate::define('vehicles.index', 'FederalSt\Policies\VehiclePolicy@view');
         Gate::define('vehicles.store', 'FederalSt\Policies\VehiclePolicy@create');
         Gate::define('vehicles.update', 'FederalSt\Policies\VehiclePolicy@update');
         Gate::define('vehicles.destroy', 'FederalSt\Policies\VehiclePolicy@delete');

@@ -7,8 +7,10 @@ use FederalSt\Http\Requests\Vehicles\StoreRequest;
 use FederalSt\Http\Requests\Vehicles\UpdateRequest;
 use FederalSt\Http\Resources\Vehicle as VehicleResource;
 use FederalSt\Http\Resources\VehicleCollection;
+use FederalSt\User;
 use FederalSt\Vehicle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
 class VehicleController extends Controller
@@ -70,8 +72,10 @@ class VehicleController extends Controller
     public function store(StoreRequest $request)
     {
         try {
+            $owner_id = $request->input('owner_id');
+
             $vehicle = Vehicle::create([
-                'owner_id' => $request->input('owner_id'),
+                'owner_id' => $owner_id,
                 'plate' => $request->input('plate'),
                 'brand' => $request->input('brand'),
                 'year' => $request->input('year'),
@@ -80,6 +84,9 @@ class VehicleController extends Controller
             ]);
 
             if ($vehicle) {
+                $user = User::find($owner_id);
+                $user->sendStoreVehicleNotification($vehicle);
+
                 return new VehicleResource($vehicle);
             } else {
                 return Response::json(['Problema ao criar o Veículo.'], 500);
@@ -138,7 +145,10 @@ class VehicleController extends Controller
                 $vehicle->vehicle_model = $vehicle_model;
                 $vehicle->renavam = $renavam;
 
-                if ($vehicle) {
+                if ($vehicle->save()) {
+                    $user = User::find($owner_id);
+                    $user->sendUpdateVehicleNotification($vehicle);
+
                     return new VehicleResource($vehicle);
                 } else {
                     return Response::json(['Problema ao salvar os Dados no Banco.'], 500);
@@ -164,6 +174,9 @@ class VehicleController extends Controller
                 ->where('id', $id)->first();
             if ($vehicle) {
                 if ($vehicle->delete()) {
+                    $user = User::find($vehicle->owner_id);
+                    $user->sendDestroyVehicleNotification($vehicle);
+
                     return new VehicleResource($vehicle);
                 } else {
                     return Response::json(['Problema ao excluir um Veículo.'], 500);

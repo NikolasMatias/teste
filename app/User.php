@@ -10,6 +10,35 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Sofa\Eloquence\Eloquence;
 
+/**
+ * FederalSt\User
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string $password
+ * @property string|null $remember_token
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property int $role
+ * @property string $phone
+ * @property string $cpf
+ * @property string|null $api_token
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read \Illuminate\Database\Eloquent\Collection|\FederalSt\Vehicle[] $vehicles
+ * @method static \Illuminate\Database\Eloquent\Builder|\FederalSt\User whereApiToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\FederalSt\User whereCpf($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\FederalSt\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\FederalSt\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\FederalSt\User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\FederalSt\User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\FederalSt\User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\FederalSt\User wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\FederalSt\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\FederalSt\User whereRole($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\FederalSt\User whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class User extends Authenticatable
 {
     use Notifiable;

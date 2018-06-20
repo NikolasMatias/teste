@@ -19,7 +19,7 @@ class VehiclePolicy
      */
     public function view(User $user, Vehicle $vehicle)
     {
-        return ($user->role >= User::ROLE_ADMIN || $user->id === $vehicle->owner_id);
+        return ($user->role >= User::ROLE_USER);
     }
 
     /**

@@ -5,10 +5,13 @@ namespace FederalSt\Http\Requests\Vehicles;
 use FederalSt\Vehicle;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Response;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
 
 class StoreRequest extends FormRequest
 {
+    protected $forceJsonResponse = true;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -16,7 +19,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize()
     {
-        $vehicle = Vehicle::find($this->get('id'));
+        $vehicle = new Vehicle();
         if (Auth::user()->can('vehicles.store', $vehicle)) {
             return true;
         }
@@ -42,11 +45,12 @@ class StoreRequest extends FormRequest
     }
 
     /**
-     * @param array $errors
-     * @return \Illuminate\Http\JsonResponse
+     * [failedValidation [Overriding the event validator for custom error response]]
+     * @param  Validator $validator [description]
+     * @return [object][object of various validation errors]
      */
-    public function response(array $errors)
-    {
-        return Response::json($errors, 403);
+    public function failedValidation(Validator $validator) {
+        //write your bussiness logic here otherwise it will give same old JSON response
+        throw new HttpResponseException(response()->json($validator->errors(), 422));
     }
 }
